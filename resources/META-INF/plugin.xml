@@ -1,0 +1,57 @@
+<idea-plugin>
+  <id>com.staszkox.test.navigator</id>
+  <name>Test navigator</name>
+  <version>1.0</version>
+  <vendor email="staszko032@gmail.com" url="http://www.yourcompany.com">StaszkoX</vendor>
+
+  <description><![CDATA[
+      Enter short description for your plugin here.<br>
+      <em>most HTML tags may be used</em>
+    ]]></description>
+
+  <change-notes><![CDATA[
+      Add change notes here.<br>
+      <em>most HTML tags may be used</em>
+    ]]>
+  </change-notes>
+
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+  <idea-version since-build="145.0"/>
+
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+       on how to target different products -->
+  <!-- uncomment to enable plugin in all products
+  <depends>com.intellij.modules.lang</depends>
+  -->
+
+  <module-components>
+    <component>
+      <implementation-class>com.staszkox.test.FirstModule</implementation-class>
+    </component>
+  </module-components>
+
+  <project-components>
+    <component>
+      <implementation-class>com.staszkox.test.FirstProjectComponent</implementation-class>
+    </component>
+  </project-components>
+
+  <actions>
+    <action id="id" class="com.staszkox.test.FileLoaded" text="test" description="test">
+    </action>
+    <action id="aaa" class="com.staszkox.test.Tessss" text="acka" description="asck">
+      <add-to-group group-id="RunMenu" anchor="last"/>
+    </action>
+  </actions>
+
+  <application-components>
+    <component>
+      <implementation-class>com.staszkox.test.Application</implementation-class>
+    </component>
+  </application-components>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <codeInsight.lineMarkerProvider language="JAVA" implementationClass="com.staszkox.test.marker.TestFileMarkerProvider"/>
+  </extensions>
+
+</idea-plugin>
