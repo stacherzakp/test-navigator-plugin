@@ -1,4 +1,4 @@
-package com.staszkox.test;
+package com.staszkox.test.navigator;
 
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.fileEditor.FileEditorManagerListener;

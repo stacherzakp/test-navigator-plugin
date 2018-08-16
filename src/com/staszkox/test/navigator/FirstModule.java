@@ -1,4 +1,4 @@
-package com.staszkox.test;
+package com.staszkox.test.navigator;
 
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleComponent;

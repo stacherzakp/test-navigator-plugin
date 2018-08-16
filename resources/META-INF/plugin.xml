@@ -26,32 +26,29 @@
 
   <module-components>
     <component>
-      <implementation-class>com.staszkox.test.FirstModule</implementation-class>
+      <implementation-class>com.staszkox.test.navigator.FirstModule</implementation-class>
     </component>
   </module-components>
 
   <project-components>
     <component>
-      <implementation-class>com.staszkox.test.FirstProjectComponent</implementation-class>
+      <implementation-class>com.staszkox.test.navigator.FirstProjectComponent</implementation-class>
     </component>
   </project-components>
 
   <actions>
-    <action id="id" class="com.staszkox.test.FileLoaded" text="test" description="test">
-    </action>
-    <action id="aaa" class="com.staszkox.test.Tessss" text="acka" description="asck">
-      <add-to-group group-id="RunMenu" anchor="last"/>
+    <action id="id" class="com.staszkox.test.navigator.FileLoaded" text="test" description="test">
     </action>
   </actions>
 
   <application-components>
     <component>
-      <implementation-class>com.staszkox.test.Application</implementation-class>
+      <implementation-class>com.staszkox.test.navigator.Application</implementation-class>
     </component>
   </application-components>
 
   <extensions defaultExtensionNs="com.intellij">
-    <codeInsight.lineMarkerProvider language="JAVA" implementationClass="com.staszkox.test.marker.TestFileMarkerProvider"/>
+    <codeInsight.lineMarkerProvider language="JAVA" implementationClass="com.staszkox.test.navigator.marker.TestFileMarkerProvider"/>
   </extensions>
 
 </idea-plugin>

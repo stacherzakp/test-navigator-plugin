@@ -1,4 +1,4 @@
-package com.staszkox.test.marker;
+package com.staszkox.test.navigator.marker;
 
 import com.intellij.codeInsight.daemon.RelatedItemLineMarkerInfo;
 import com.intellij.codeInsight.daemon.RelatedItemLineMarkerProvider;
@@ -7,9 +7,9 @@ import com.intellij.icons.AllIcons;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiIdentifier;
-import com.staszkox.test.configuration.TestFileSuffix;
-import com.staszkox.test.finder.SourceFileFinder;
-import com.staszkox.test.finder.TestFileFinder;
+import com.staszkox.test.navigator.configuration.TestFileSuffix;
+import com.staszkox.test.navigator.finder.SourceFileFinder;
+import com.staszkox.test.navigator.finder.TestFileFinder;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;

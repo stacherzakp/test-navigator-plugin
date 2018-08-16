@@ -1,4 +1,4 @@
-package com.staszkox.test.configuration;
+package com.staszkox.test.navigator.configuration;
 
 public class TestFileSuffix
 {

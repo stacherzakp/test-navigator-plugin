@@ -1,11 +1,11 @@
-package com.staszkox.test.finder;
+package com.staszkox.test.navigator.finder;
 
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.JavaPsiFacade;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.search.GlobalSearchScope;
-import com.staszkox.test.finder.utils.FileFinderHelper;
+import com.staszkox.test.navigator.finder.utils.FileFinderHelper;
 
 import java.util.Optional;
 

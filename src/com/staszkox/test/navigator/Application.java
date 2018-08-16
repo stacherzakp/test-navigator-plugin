@@ -1,4 +1,4 @@
-package com.staszkox.test;
+package com.staszkox.test.navigator;
 
 import com.intellij.openapi.components.ApplicationComponent;
 

@@ -1,7 +1,7 @@
-package com.staszkox.test.finder;
+package com.staszkox.test.navigator.finder;
 
 import com.intellij.psi.PsiClass;
-import com.staszkox.test.configuration.TestFileSuffix;
+import com.staszkox.test.navigator.configuration.TestFileSuffix;
 
 public class SourceFileFinder extends FileFinder
 {
