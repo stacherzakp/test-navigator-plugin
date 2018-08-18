@@ -14,7 +14,7 @@
       <em>most HTML tags may be used</em>
     ]]>
   </change-notes>
-
+  
   <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
   <idea-version since-build="145.0"/>
 
@@ -23,29 +23,6 @@
   <!-- uncomment to enable plugin in all products
   <depends>com.intellij.modules.lang</depends>
   -->
-
-  <module-components>
-    <component>
-      <implementation-class>com.staszkox.test.navigator.FirstModule</implementation-class>
-    </component>
-  </module-components>
-
-  <project-components>
-    <component>
-      <implementation-class>com.staszkox.test.navigator.FirstProjectComponent</implementation-class>
-    </component>
-  </project-components>
-
-  <actions>
-    <action id="id" class="com.staszkox.test.navigator.FileLoaded" text="test" description="test">
-    </action>
-  </actions>
-
-  <application-components>
-    <component>
-      <implementation-class>com.staszkox.test.navigator.Application</implementation-class>
-    </component>
-  </application-components>
 
   <extensions defaultExtensionNs="com.intellij">
     <codeInsight.lineMarkerProvider language="JAVA" implementationClass="com.staszkox.test.navigator.marker.TestFileMarkerProvider"/>

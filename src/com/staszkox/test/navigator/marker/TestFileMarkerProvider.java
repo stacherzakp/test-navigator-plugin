@@ -7,6 +7,7 @@ import com.intellij.icons.AllIcons;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiIdentifier;
+import com.staszkox.test.navigator.icons.NavigationIcons;
 import com.staszkox.test.navigator.configuration.TestFileSuffix;
 import com.staszkox.test.navigator.finder.SourceFileFinder;
 import com.staszkox.test.navigator.finder.TestFileFinder;
@@ -33,7 +34,7 @@ public class TestFileMarkerProvider extends RelatedItemLineMarkerProvider
                     if (hasTestCases(testFile.get()))
                     {
                         NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
-                                .create(AllIcons.RunConfigurations.TestPassed)
+                                .create(NavigationIcons.testClassAvailable)
                                 .setTooltipText("Navigate to test file")
                                 .setTargets(testFile.get());
 
@@ -42,7 +43,7 @@ public class TestFileMarkerProvider extends RelatedItemLineMarkerProvider
                     else
                     {
                         NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
-                                .create(AllIcons.RunConfigurations.TestFailed)
+                                .create(NavigationIcons.noTestsInTestClass)
                                 .setTooltipText("Test file has no tests")
                                 .setTargets(testFile.get());
 
@@ -52,7 +53,7 @@ public class TestFileMarkerProvider extends RelatedItemLineMarkerProvider
                 else
                 {
                     NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
-                            .create(AllIcons.RunConfigurations.TestUnknown)
+                            .create(NavigationIcons.testClassNotAvailable)
                             .setTooltipText("Missing test file")
                             .setTargets(element);
 
@@ -66,7 +67,7 @@ public class TestFileMarkerProvider extends RelatedItemLineMarkerProvider
                 if (sourceFile.isPresent())
                 {
                     NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
-                            .create(AllIcons.RunConfigurations.TestPassed)
+                            .create(NavigationIcons.sourceClassAvailable)
                             .setTooltipText("Navigate to source file")
                             .setTargets(sourceFile.get());
 
@@ -75,7 +76,7 @@ public class TestFileMarkerProvider extends RelatedItemLineMarkerProvider
                 else
                 {
                     NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
-                            .create(AllIcons.RunConfigurations.TestUnknown)
+                            .create(NavigationIcons.sourceClassNotAvailable)
                             .setTooltipText("Missing source file")
                             .setTargets(element);
 
