@@ -3,14 +3,13 @@ package com.staszkox.test.navigator.marker;
 import com.intellij.codeInsight.daemon.RelatedItemLineMarkerInfo;
 import com.intellij.codeInsight.daemon.RelatedItemLineMarkerProvider;
 import com.intellij.codeInsight.navigation.NavigationGutterIconBuilder;
-import com.intellij.icons.AllIcons;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiIdentifier;
-import com.staszkox.test.navigator.icons.NavigationIcons;
 import com.staszkox.test.navigator.configuration.TestFileSuffix;
 import com.staszkox.test.navigator.finder.SourceFileFinder;
 import com.staszkox.test.navigator.finder.TestFileFinder;
+import com.staszkox.test.navigator.icons.NavigationIconsBuilder;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
@@ -33,29 +32,23 @@ public class TestFileMarkerProvider extends RelatedItemLineMarkerProvider
                 {
                     if (hasTestCases(testFile.get()))
                     {
-                        NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
-                                .create(NavigationIcons.testClassAvailable)
-                                .setTooltipText("Navigate to test file")
-                                .setTargets(testFile.get());
+                        NavigationGutterIconBuilder<PsiElement> builder =
+                                NavigationIconsBuilder.TEST_CLASS_AVAILABLE.target(testFile.get());
 
                         result.add(builder.createLineMarkerInfo(element));
                     }
                     else
                     {
-                        NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
-                                .create(NavigationIcons.noTestsInTestClass)
-                                .setTooltipText("Test file has no tests")
-                                .setTargets(testFile.get());
+                        NavigationGutterIconBuilder<PsiElement> builder =
+                                NavigationIconsBuilder.TEST_CLASS_HAS_NO_TESTS.target(testFile.get());
 
                         result.add(builder.createLineMarkerInfo(element));
                     }
                 }
                 else
                 {
-                    NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
-                            .create(NavigationIcons.testClassNotAvailable)
-                            .setTooltipText("Missing test file")
-                            .setTargets(element);
+                    NavigationGutterIconBuilder<PsiElement> builder =
+                            NavigationIconsBuilder.TEST_CLASS_NOT_AVAILABLE.target(element);
 
                     result.add(builder.createLineMarkerInfo(element));
                 }
@@ -66,19 +59,15 @@ public class TestFileMarkerProvider extends RelatedItemLineMarkerProvider
 
                 if (sourceFile.isPresent())
                 {
-                    NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
-                            .create(NavigationIcons.sourceClassAvailable)
-                            .setTooltipText("Navigate to source file")
-                            .setTargets(sourceFile.get());
+                    NavigationGutterIconBuilder<PsiElement> builder =
+                            NavigationIconsBuilder.SOURCE_CLASS_AVAILABLE.target(sourceFile.get());
 
                     result.add(builder.createLineMarkerInfo(element));
                 }
                 else
                 {
-                    NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
-                            .create(NavigationIcons.sourceClassNotAvailable)
-                            .setTooltipText("Missing source file")
-                            .setTargets(element);
+                    NavigationGutterIconBuilder<PsiElement> builder =
+                            NavigationIconsBuilder.SOURCE_CLASS_NOT_AVAILABLE.target(element);
 
                     result.add(builder.createLineMarkerInfo(element));
                 }
