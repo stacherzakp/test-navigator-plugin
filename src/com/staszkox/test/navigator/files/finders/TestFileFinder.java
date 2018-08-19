@@ -1,4 +1,4 @@
-package com.staszkox.test.navigator.finder;
+package com.staszkox.test.navigator.files.finders;
 
 import com.intellij.psi.PsiClass;
 import com.staszkox.test.navigator.configuration.TestFileSuffix;

@@ -6,9 +6,10 @@ import com.intellij.codeInsight.navigation.NavigationGutterIconBuilder;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiIdentifier;
-import com.staszkox.test.navigator.configuration.TestFileSuffix;
-import com.staszkox.test.navigator.finder.SourceFileFinder;
-import com.staszkox.test.navigator.finder.TestFileFinder;
+import com.staszkox.test.navigator.files.checkers.ClassContentChecker;
+import com.staszkox.test.navigator.files.checkers.ClassTypeChecker;
+import com.staszkox.test.navigator.files.finders.SourceFileFinder;
+import com.staszkox.test.navigator.files.finders.TestFileFinder;
 import com.staszkox.test.navigator.icons.NavigationIconsBuilder;
 import org.jetbrains.annotations.NotNull;
 
@@ -22,86 +23,63 @@ public class TestFileMarkerProvider extends RelatedItemLineMarkerProvider
     {
         if (element instanceof PsiIdentifier && element.getParent() instanceof PsiClass)
         {
-            PsiClass clazz = (PsiClass) element.getParent();
+            PsiClass currentClass = (PsiClass) element.getParent();
+            NavigationGutterIconBuilder<PsiElement> navigationIconBuilder = null;
 
-            if (isSourceClass(clazz))
+            if (ClassTypeChecker.isSourceClass(currentClass))
             {
-                Optional<PsiClass> testFile = TestFileFinder.forClass(clazz).findFile();
-
-                if (testFile.isPresent())
-                {
-                    if (hasTestCases(testFile.get()))
-                    {
-                        NavigationGutterIconBuilder<PsiElement> builder =
-                                NavigationIconsBuilder.TEST_CLASS_AVAILABLE.target(testFile.get());
-
-                        result.add(builder.createLineMarkerInfo(element));
-                    }
-                    else
-                    {
-                        NavigationGutterIconBuilder<PsiElement> builder =
-                                NavigationIconsBuilder.TEST_CLASS_HAS_NO_TESTS.target(testFile.get());
-
-                        result.add(builder.createLineMarkerInfo(element));
-                    }
-                }
-                else
-                {
-                    NavigationGutterIconBuilder<PsiElement> builder =
-                            NavigationIconsBuilder.TEST_CLASS_NOT_AVAILABLE.target(element);
-
-                    result.add(builder.createLineMarkerInfo(element));
-                }
+                Optional<PsiClass> testClass = TestFileFinder.forClass(currentClass).findFile();
+                navigationIconBuilder = findIconForSourceClass(currentClass, testClass);
             }
-            else if (isTestClass(clazz))
+            else if (ClassTypeChecker.isTestClass(currentClass))
             {
-                Optional<PsiClass> sourceFile = SourceFileFinder.forClass(clazz).findFile();
+                Optional<PsiClass> sourceClass = SourceFileFinder.forClass(currentClass).findFile();
+                navigationIconBuilder = findIconForTestClass(currentClass, sourceClass);
+            }
 
-                if (sourceFile.isPresent())
-                {
-                    NavigationGutterIconBuilder<PsiElement> builder =
-                            NavigationIconsBuilder.SOURCE_CLASS_AVAILABLE.target(sourceFile.get());
-
-                    result.add(builder.createLineMarkerInfo(element));
-                }
-                else
-                {
-                    NavigationGutterIconBuilder<PsiElement> builder =
-                            NavigationIconsBuilder.SOURCE_CLASS_NOT_AVAILABLE.target(element);
-
-                    result.add(builder.createLineMarkerInfo(element));
-                }
+            if (navigationIconBuilder != null)
+            {
+                result.add(navigationIconBuilder.createLineMarkerInfo(element));
             }
         }
     }
 
-    private boolean isSourceClass(PsiClass clazz)
+    private NavigationGutterIconBuilder<PsiElement> findIconForSourceClass(PsiClass sourceClass, Optional<PsiClass> testClass)
     {
-        //TODO validation for inner classes etc.
+        NavigationGutterIconBuilder<PsiElement> navigationIconBuilder;
 
-        if (clazz != null && clazz.getQualifiedName() != null)
+        if (testClass.isPresent())
         {
-            return !clazz.getQualifiedName().endsWith(TestFileSuffix.TEST_SUFFIX);
+            if (ClassContentChecker.hasTestCases(testClass.get()))
+            {
+                navigationIconBuilder = NavigationIconsBuilder.TEST_CLASS_AVAILABLE.forTarget(testClass.get());
+            }
+            else
+            {
+                navigationIconBuilder = NavigationIconsBuilder.TEST_CLASS_HAS_NO_TESTS.forTarget(testClass.get());
+            }
+        }
+        else
+        {
+            navigationIconBuilder = NavigationIconsBuilder.TEST_CLASS_NOT_AVAILABLE.forTarget(sourceClass);
         }
 
-        return false;
+        return navigationIconBuilder;
     }
 
-    private boolean isTestClass(PsiClass clazz)
+    private NavigationGutterIconBuilder<PsiElement> findIconForTestClass(PsiClass testClass, Optional<PsiClass> sourceClass)
     {
-        if (clazz != null && clazz.getQualifiedName() != null)
+        NavigationGutterIconBuilder<PsiElement> navigationIconBuilder;
+
+        if (sourceClass.isPresent())
         {
-            return clazz.getQualifiedName().endsWith(TestFileSuffix.TEST_SUFFIX);
+            navigationIconBuilder = NavigationIconsBuilder.SOURCE_CLASS_AVAILABLE.forTarget(sourceClass.get());
+        }
+        else
+        {
+            navigationIconBuilder = NavigationIconsBuilder.SOURCE_CLASS_NOT_AVAILABLE.forTarget(testClass);
         }
 
-        return false;
-    }
-
-    private boolean hasTestCases(PsiClass clazz)
-    {
-        //TODO check if class contains test cases
-        return true;
-//        return Arrays.stream(clazz.getMethods())
-//                .anyMatch(method -> AnnotationUtil.findAnnotation(method, true, "Test") != null);
+        return navigationIconBuilder;
     }
 }

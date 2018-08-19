@@ -22,7 +22,7 @@ public enum NavigationIconsBuilder
         this.tooltipText = tooltipText;
     }
 
-    public NavigationGutterIconBuilder<PsiElement> target(PsiElement target)
+    public NavigationGutterIconBuilder<PsiElement> forTarget(PsiElement target)
     {
         return NavigationGutterIconBuilder.create(icon)
                 .setTooltipText(tooltipText)

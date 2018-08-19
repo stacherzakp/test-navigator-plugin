@@ -1,19 +1,19 @@
-package com.staszkox.test.navigator.finder;
+package com.staszkox.test.navigator.files.finders;
 
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.JavaPsiFacade;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.search.GlobalSearchScope;
-import com.staszkox.test.navigator.finder.utils.FileFinderHelper;
+import com.staszkox.test.navigator.files.finders.utils.FileFinderHelper;
 
 import java.util.Optional;
 
-public abstract class FileFinder
+abstract class FileFinder
 {
     private final PsiClass clazz;
 
-    protected FileFinder(PsiClass clazz)
+    FileFinder(PsiClass clazz)
     {
         this.clazz = clazz;
     }
