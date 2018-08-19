@@ -1,26 +1,25 @@
 package com.staszkox.test.navigator.configuration;
 
-import org.junit.Test;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public enum TestAnnotations
 {
-    JUNIT(Test.class);
+    JUNIT4("org.junit.Test"),
+    JUNIT5("org.junit.jupiter.api.Test");
 
-    private final Class annotationClass;
+    private final String fullTestAnnotationClassName;
 
-    TestAnnotations(Class annotationClass)
+    TestAnnotations(String fullTestAnnotationClassName)
     {
-        this.annotationClass = annotationClass;
+        this.fullTestAnnotationClassName = fullTestAnnotationClassName;
     }
 
     public static List<String> getAllAnnotationNames()
     {
         return Arrays.stream(TestAnnotations.values())
-                .map(testAnnotation -> testAnnotation.annotationClass.getCanonicalName())
+                .map(testAnnotation -> testAnnotation.fullTestAnnotationClassName)
                 .collect(Collectors.toList());
     }
 }
