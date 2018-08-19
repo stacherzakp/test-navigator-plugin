@@ -1,18 +1,24 @@
 <idea-plugin>
-  <id>com.staszkox.test.navigator</id>
-  <name>Test navigator</name>
-  <version>1.0</version>
-  <vendor email="pawel.stacherzak@gmail.com" url="https://github.com/stacherzakp">StaszkoX</vendor>
+    <id>com.staszkox.test.navigator</id>
+    <name>Test navigator</name>
+    <version>1.0</version>
+    <vendor email="pawel.stacherzak@gmail.com" url="https://github.com/stacherzakp">StaszkoX</vendor>
 
-  <description><![CDATA[
+    <description><![CDATA[
       Plugin adds new gutter icons.<br>
       They allow to navigate to source/test class if corresponding class exists.<br>
     ]]></description>
 
-  <idea-version since-build="145.0"/>
+    <change-notes><![CDATA[
+      Release 0.0.1: First release.<br>
+    ]]>
+    </change-notes>
 
-  <extensions defaultExtensionNs="com.intellij">
-    <codeInsight.lineMarkerProvider language="JAVA" implementationClass="com.staszkox.test.navigator.marker.TestFileMarkerProvider"/>
-  </extensions>
+    <idea-version since-build="145.0"/>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <codeInsight.lineMarkerProvider language="JAVA"
+                                        implementationClass="com.staszkox.test.navigator.marker.TestFileMarkerProvider"/>
+    </extensions>
 
 </idea-plugin>
