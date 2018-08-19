@@ -18,7 +18,7 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <codeInsight.lineMarkerProvider language="JAVA"
-                                        implementationClass="com.staszkox.test.navigator.marker.TestFileMarkerProvider"/>
+                                        implementationClass="com.staszkox.test.navigator.marker.NavigationIconsMarkerProvider"/>
     </extensions>
 
 </idea-plugin>

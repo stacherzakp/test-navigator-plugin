@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Collection;
 import java.util.Optional;
 
-public class TestFileMarkerProvider extends RelatedItemLineMarkerProvider
+public class NavigationIconsMarkerProvider extends RelatedItemLineMarkerProvider
 {
     @Override
     protected void collectNavigationMarkers(@NotNull PsiElement element, Collection<? super RelatedItemLineMarkerInfo> result)
