@@ -5,15 +5,30 @@ import com.staszkox.test.navigator.configuration.TestFileSuffix;
 
 public class ClassTypeChecker
 {
-    public static boolean isTestClass(PsiClass clazz)
+    private final PsiClass psiClass;
+
+    public static ClassTypeChecker of(PsiClass psiClass)
     {
-        return clazz != null && clazz.getQualifiedName() != null &&
-                clazz.getQualifiedName().endsWith(TestFileSuffix.TEST_SUFFIX);
+        return new ClassTypeChecker(psiClass);
     }
 
-    public static boolean isSourceClass(PsiClass clazz)
+    private ClassTypeChecker(PsiClass psiClass)
     {
-        return clazz != null && clazz.getQualifiedName() != null &&
-                !clazz.getQualifiedName().endsWith(TestFileSuffix.TEST_SUFFIX);
+        this.psiClass = psiClass;
+    }
+
+    public boolean isTestClass()
+    {
+        return psiClass != null && nameEndsWithTestSuffix();
+    }
+
+    public boolean isSourceClass()
+    {
+        return psiClass != null && !nameEndsWithTestSuffix();
+    }
+
+    private boolean nameEndsWithTestSuffix()
+    {
+        return psiClass.getQualifiedName() != null && psiClass.getQualifiedName().endsWith(TestFileSuffix.TEST_SUFFIX);
     }
 }

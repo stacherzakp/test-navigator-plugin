@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.staszkox.test.navigator</id>
     <name>Test navigator</name>
-    <version>1.0</version>
+    <version>1.1</version>
     <vendor email="pawel.stacherzak@gmail.com" url="https://github.com/stacherzakp">StaszkoX</vendor>
 
     <description><![CDATA[
@@ -11,6 +11,7 @@
 
     <change-notes><![CDATA[
       Release 1.0: First release.<br>
+      Release 1.1: Bug fixing. JUnit 5 parametrized tests supported.<br>
     ]]>
     </change-notes>
 

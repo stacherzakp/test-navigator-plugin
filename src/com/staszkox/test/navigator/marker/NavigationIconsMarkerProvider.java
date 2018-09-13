@@ -26,12 +26,14 @@ public class NavigationIconsMarkerProvider extends RelatedItemLineMarkerProvider
             PsiClass currentClass = (PsiClass) element.getParent();
             NavigationGutterIconBuilder<PsiElement> navigationIconBuilder = null;
 
-            if (ClassTypeChecker.isSourceClass(currentClass))
+            ClassTypeChecker typeChecker = ClassTypeChecker.of(currentClass);
+
+            if (typeChecker.isSourceClass())
             {
                 Optional<PsiClass> testClass = TestFileFinder.forClass(currentClass).findFile();
                 navigationIconBuilder = findIconForSourceClass(currentClass, testClass);
             }
-            else if (ClassTypeChecker.isTestClass(currentClass))
+            else if (typeChecker.isTestClass())
             {
                 Optional<PsiClass> sourceClass = SourceFileFinder.forClass(currentClass).findFile();
                 navigationIconBuilder = findIconForTestClass(currentClass, sourceClass);

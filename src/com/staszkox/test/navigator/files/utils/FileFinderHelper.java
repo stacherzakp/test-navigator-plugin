@@ -1,4 +1,4 @@
-package com.staszkox.test.navigator.files.finders.utils;
+package com.staszkox.test.navigator.files.utils;
 
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
