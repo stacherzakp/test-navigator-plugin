@@ -7,7 +7,9 @@ import java.util.stream.Collectors;
 public enum TestAnnotations
 {
     JUNIT4("org.junit.Test"),
-    JUNIT5("org.junit.jupiter.api.Test");
+    JUNIT5("org.junit.jupiter.api.Test"),
+    JUNIT5_REPEATED_TEST("org.junit.jupiter.api.RepeatedTest"),
+    JUNIT5_PARAMETRIZED_TEST("org.junit.jupiter.params.ParameterizedTest");
 
     private final String fullTestAnnotationClassName;
 
