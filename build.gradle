@@ -5,16 +5,25 @@ plugins {
 sourceSets {
     main {
         java {
-            srcDirs = ['src']
+            srcDirs = ['src/main/java']
         }
         resources {
             srcDirs = ['resources']
+        }
+    }
+    test {
+        java {
+            srcDirs = ['src/test']
         }
     }
 }
 
 repositories {
     mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'org.mockito', name: 'mockito-core', version: '2.22.0'
 }
 
 apply plugin: 'idea'
