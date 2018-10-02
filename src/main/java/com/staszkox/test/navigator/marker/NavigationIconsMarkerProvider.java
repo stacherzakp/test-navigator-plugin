@@ -10,6 +10,7 @@ import com.staszkox.test.navigator.files.checkers.ClassContentChecker;
 import com.staszkox.test.navigator.files.checkers.ClassTypeChecker;
 import com.staszkox.test.navigator.files.finders.SourceFileFinder;
 import com.staszkox.test.navigator.files.finders.TestFileFinder;
+import com.staszkox.test.navigator.files.utils.PsiClassHelper;
 import com.staszkox.test.navigator.icons.NavigationIconsBuilder;
 import org.jetbrains.annotations.NotNull;
 
@@ -21,7 +22,7 @@ public class NavigationIconsMarkerProvider extends RelatedItemLineMarkerProvider
     @Override
     protected void collectNavigationMarkers(@NotNull PsiElement element, Collection<? super RelatedItemLineMarkerInfo> result)
     {
-        if (element instanceof PsiIdentifier && element.getParent() instanceof PsiClass)
+        if (isSupportedElement(element))
         {
             PsiClass currentClass = (PsiClass) element.getParent();
             NavigationGutterIconBuilder<PsiElement> navigationIconBuilder = null;
@@ -83,5 +84,27 @@ public class NavigationIconsMarkerProvider extends RelatedItemLineMarkerProvider
         }
 
         return navigationIconBuilder;
+    }
+
+    private boolean isSupportedElement(PsiElement element)
+    {
+        boolean isSupportedElement = false;
+
+        boolean isPsiClass = element instanceof PsiIdentifier &&
+                element.getParent() instanceof PsiClass;
+
+        if (isPsiClass)
+        {
+            PsiClass psiClass = (PsiClass) element.getParent();
+            boolean isJavaClass = PsiClassHelper.isJavaClass(psiClass);
+            boolean isInterface = psiClass.isInterface();
+
+            if (isJavaClass && !isInterface)
+            {
+                isSupportedElement = true;
+            }
+        }
+
+        return isSupportedElement;
     }
 }
