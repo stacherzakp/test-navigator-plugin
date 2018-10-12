@@ -22,11 +22,16 @@ public class PsiClassHelper
 
     public static boolean isJavaClass(PsiClass psiClass)
     {
-        return psiClass.isPhysical() && Objects.equals(getVirtualFile(psiClass).getExtension(), JAVA_EXT);
+        return getVirtualFile(psiClass) != null && Objects.equals(getVirtualFile(psiClass).getExtension(), JAVA_EXT);
     }
 
     private static VirtualFile getVirtualFile(PsiClass clazz)
     {
+        if (clazz == null || clazz.getContainingFile() == null)
+        {
+            return null;
+        }
+
         return clazz.getContainingFile().getVirtualFile();
     }
 }
