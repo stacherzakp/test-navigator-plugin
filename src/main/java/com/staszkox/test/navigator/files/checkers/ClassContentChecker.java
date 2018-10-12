@@ -13,6 +13,6 @@ public class ClassContentChecker
 
     public static boolean hasTestCases(PsiClass clazz)
     {
-        return Arrays.stream(clazz.getMethods()).anyMatch(method -> AnnotationUtil.isAnnotated(method, testAnnotationNames));
+        return Arrays.stream(clazz.getAllMethods()).anyMatch(method -> AnnotationUtil.isAnnotated(method, testAnnotationNames));
     }
 }

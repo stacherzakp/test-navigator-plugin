@@ -1,0 +1,30 @@
+plugins {
+    id "org.jetbrains.intellij" version "0.3.11"
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java']
+        }
+        resources {
+            srcDirs = ['resources']
+        }
+    }
+    test {
+        java {
+            srcDirs = ['src/test']
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'org.mockito', name: 'mockito-core', version: '2.22.0'
+}
+
+apply plugin: 'idea'
+apply plugin: 'java'

@@ -1,16 +1,18 @@
 <idea-plugin>
     <id>com.staszkox.test.navigator</id>
     <name>Test navigator</name>
-    <version>1.0</version>
+    <version>1.1</version>
     <vendor email="pawel.stacherzak@gmail.com" url="https://github.com/stacherzakp">StaszkoX</vendor>
 
     <description><![CDATA[
-      Plugin adds new gutter icons.<br>
-      They allow to navigate to source/test class if corresponding class exists.<br>
+      Plugin adds a new gutter icon, which marks java class as tested class
+      (if corresponding test class exists) or as class without tests.<br>
+      Moreover it allows to navigate between such joined classes.<br>
     ]]></description>
 
     <change-notes><![CDATA[
       Release 1.0: First release.<br>
+      Release 1.1: Bug fixing. JUnit 5 tests supported.<br>
     ]]>
     </change-notes>
 
