@@ -1,4 +1,4 @@
-package com.staszkox.test.navigator.configuration;
+package com.staszkox.test.navigator.files.checkers;
 
 import java.util.Arrays;
 import java.util.List;

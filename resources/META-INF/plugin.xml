@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.staszkox.test.navigator</id>
     <name>Test navigator</name>
-    <version>1.1</version>
+    <version>2.0</version>
     <vendor email="pawel.stacherzak@gmail.com" url="https://github.com/stacherzakp">StaszkoX</vendor>
 
     <description><![CDATA[
@@ -13,6 +13,7 @@
     <change-notes><![CDATA[
       Release 1.0: First release.<br>
       Release 1.1: Bug fixing. JUnit 5 tests supported.<br>
+      Release 2.0: Test class suffixes became configurable.<br>
     ]]>
     </change-notes>
 
@@ -21,6 +22,17 @@
     <extensions defaultExtensionNs="com.intellij">
         <codeInsight.lineMarkerProvider language="JAVA"
                                         implementationClass="com.staszkox.test.navigator.marker.NavigationIconsMarkerProvider"/>
+        <applicationConfigurable groupId="appearance" id="preference.TestNavigator"
+                                 instance="com.staszkox.test.navigator.configuration.TestNavigatorConfigurable"/>
+        <applicationService serviceInterface="com.staszkox.test.navigator.configuration.TestNavigatorConfig"
+                            serviceImplementation="com.staszkox.test.navigator.configuration.TestNavigatorConfig"/>
     </extensions>
+
+    <!--<application-components>-->
+        <!--<component>-->
+            <!--<interface-class>com.staszkox.test.navigator.configuration.TestNavigatorConfig</interface-class>-->
+            <!--<implementation-class>com.staszkox.test.navigator.configuration.TestNavigatorConfig</implementation-class>-->
+        <!--</component>-->
+    <!--</application-components>-->
 
 </idea-plugin>

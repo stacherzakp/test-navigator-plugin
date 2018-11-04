@@ -1,7 +1,10 @@
 package com.staszkox.test.navigator.files.finders;
 
 import com.intellij.psi.PsiClass;
-import com.staszkox.test.navigator.configuration.TestFileSuffix;
+import com.staszkox.test.navigator.configuration.TestNavigatorConfig;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class SourceFileFinder extends FileFinder
 {
@@ -16,8 +19,13 @@ public class SourceFileFinder extends FileFinder
     }
 
     @Override
-    protected String getFileNameForSearch()
+    protected List<String> getFileNamesForSearch()
     {
-        return getBaseClass().getQualifiedName().replace(TestFileSuffix.TEST_SUFFIX, "");
+        List<String> testClassSuffixes = TestNavigatorConfig.getInstance().getTestClassSuffixes();
+
+        return testClassSuffixes.stream()
+                .map(suffix -> getBaseClass().getQualifiedName().replace(suffix, ""))
+                .filter(fileForSearch -> !getBaseClass().getQualifiedName().equals(fileForSearch))
+                .collect(Collectors.toList());
     }
 }
