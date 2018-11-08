@@ -22,17 +22,10 @@
     <extensions defaultExtensionNs="com.intellij">
         <codeInsight.lineMarkerProvider language="JAVA"
                                         implementationClass="com.staszkox.test.navigator.marker.NavigationIconsMarkerProvider"/>
-        <applicationConfigurable groupId="appearance" id="preference.TestNavigator"
+        <applicationConfigurable groupId="tools" id="preference.TestNavigator"
                                  instance="com.staszkox.test.navigator.configuration.TestNavigatorConfigurable"/>
         <applicationService serviceInterface="com.staszkox.test.navigator.configuration.TestNavigatorConfig"
                             serviceImplementation="com.staszkox.test.navigator.configuration.TestNavigatorConfig"/>
     </extensions>
-
-    <!--<application-components>-->
-        <!--<component>-->
-            <!--<interface-class>com.staszkox.test.navigator.configuration.TestNavigatorConfig</interface-class>-->
-            <!--<implementation-class>com.staszkox.test.navigator.configuration.TestNavigatorConfig</implementation-class>-->
-        <!--</component>-->
-    <!--</application-components>-->
 
 </idea-plugin>
