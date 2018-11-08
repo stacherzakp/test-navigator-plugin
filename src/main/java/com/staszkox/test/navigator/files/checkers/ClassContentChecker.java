@@ -2,7 +2,6 @@ package com.staszkox.test.navigator.files.checkers;
 
 import com.intellij.codeInsight.AnnotationUtil;
 import com.intellij.psi.PsiClass;
-import com.staszkox.test.navigator.configuration.TestAnnotations;
 
 import java.util.Arrays;
 import java.util.List;

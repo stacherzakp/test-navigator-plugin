@@ -1,10 +1,12 @@
 package com.staszkox.test.navigator.files.checkers;
 
 import com.intellij.psi.PsiClass;
-import com.staszkox.test.navigator.configuration.TestFileSuffix;
+import com.staszkox.test.navigator.configuration.TestNavigatorConfig;
 
 public class ClassTypeChecker
 {
+    private static final TestNavigatorConfig config = TestNavigatorConfig.getInstance();
+
     private final PsiClass psiClass;
 
     public static ClassTypeChecker of(PsiClass psiClass)
@@ -29,6 +31,7 @@ public class ClassTypeChecker
 
     private boolean nameEndsWithTestSuffix()
     {
-        return psiClass.getQualifiedName() != null && psiClass.getQualifiedName().endsWith(TestFileSuffix.TEST_SUFFIX);
+        return psiClass.getQualifiedName() != null && config.getTestClassSuffixes().stream()
+                .anyMatch(suffix -> psiClass.getQualifiedName().endsWith(suffix));
     }
 }

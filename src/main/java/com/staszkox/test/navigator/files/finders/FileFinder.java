@@ -7,6 +7,8 @@ import com.intellij.psi.PsiClass;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.staszkox.test.navigator.files.utils.PsiClassHelper;
 
+import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 abstract class FileFinder
@@ -22,15 +24,17 @@ abstract class FileFinder
     {
         Project project = clazz.getProject();
         Module module = PsiClassHelper.getClassModule(clazz);
-        String fileToFind = getFileNameForSearch();
+        List<String> filesToFind = getFileNamesForSearch();
 
         JavaPsiFacade javaPsiFacade = JavaPsiFacade.getInstance(project);
-        PsiClass matchedFile = javaPsiFacade.findClass(fileToFind, GlobalSearchScope.moduleScope(module));
 
-        return Optional.ofNullable(matchedFile);
+        return filesToFind.stream()
+                .map(fileToFind -> javaPsiFacade.findClass(fileToFind, GlobalSearchScope.moduleScope(module)))
+                .filter(Objects::nonNull)
+                .findFirst();
     }
 
-    protected abstract String getFileNameForSearch();
+    protected abstract List<String> getFileNamesForSearch();
 
     PsiClass getBaseClass()
     {

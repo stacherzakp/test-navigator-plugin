@@ -97,8 +97,9 @@ public class NavigationIconsMarkerProvider extends RelatedItemLineMarkerProvider
         {
             PsiClass psiClass = (PsiClass) element.getParent();
             boolean isJavaClass = PsiClassHelper.isJavaClass(psiClass);
+            boolean isInModule = PsiClassHelper.getClassModule(psiClass) != null;
 
-            if (isJavaClass)
+            if (isJavaClass && isInModule)
             {
                 isSupportedElement = true;
             }
