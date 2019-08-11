@@ -3,35 +3,36 @@ package com.staszkox.test.navigator.files.checkers;
 import com.intellij.psi.PsiClass;
 import com.staszkox.test.navigator.configuration.TestNavigatorConfig;
 
-public class ClassTypeChecker
-{
-    private static final TestNavigatorConfig config = TestNavigatorConfig.getInstance();
+import java.util.Collections;
+import java.util.List;
 
-    private final PsiClass psiClass;
+public class ClassTypeChecker {
 
-    public static ClassTypeChecker of(PsiClass psiClass)
-    {
+    public static ClassTypeChecker of(PsiClass psiClass) {
         return new ClassTypeChecker(psiClass);
     }
 
-    private ClassTypeChecker(PsiClass psiClass)
-    {
+    private final PsiClass psiClass;
+
+    private ClassTypeChecker(PsiClass psiClass) {
         this.psiClass = psiClass;
     }
 
-    public boolean isTestClass()
-    {
+    public boolean isTestClass() {
         return psiClass != null && nameEndsWithTestSuffix();
     }
 
-    public boolean isSourceClass()
-    {
+    public boolean isSourceClass() {
         return psiClass != null && !nameEndsWithTestSuffix();
     }
 
-    private boolean nameEndsWithTestSuffix()
-    {
-        return psiClass.getQualifiedName() != null && config.getTestClassSuffixes().stream()
+    private boolean nameEndsWithTestSuffix() {
+
+        TestNavigatorConfig config = TestNavigatorConfig.getInstance();
+        List<String> testSuffixes = config != null ?
+                config.getTestClassSuffixes() : Collections.emptyList();
+
+        return psiClass.getQualifiedName() != null && testSuffixes.stream()
                 .anyMatch(suffix -> psiClass.getQualifiedName().endsWith(suffix));
     }
 }

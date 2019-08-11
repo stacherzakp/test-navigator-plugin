@@ -4,8 +4,7 @@ import com.intellij.openapi.util.IconLoader;
 
 import javax.swing.*;
 
-interface NavigationIcons
-{
+interface NavigationIcons {
     Icon testClassAvailable = IconLoader.getIcon("/icons/greenTest.png");
     Icon testClassNotAvailable = IconLoader.getIcon("/icons/redTest.png");
     Icon noTestsInTestClass = IconLoader.getIcon("/icons/yellowTest.png");

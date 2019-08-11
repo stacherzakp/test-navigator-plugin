@@ -17,90 +17,65 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Collection;
 import java.util.Optional;
 
-public class NavigationIconsMarkerProvider extends RelatedItemLineMarkerProvider
-{
+public class NavigationIconsMarkerProvider extends RelatedItemLineMarkerProvider {
     @Override
-    protected void collectNavigationMarkers(@NotNull PsiElement element, Collection<? super RelatedItemLineMarkerInfo> result)
-    {
-        if (isSupportedElement(element))
-        {
+    protected void collectNavigationMarkers(@NotNull PsiElement element, Collection<? super RelatedItemLineMarkerInfo> result) {
+
+        if (isSupportedElement(element)) {
             PsiClass currentClass = (PsiClass) element.getParent();
             NavigationGutterIconBuilder<PsiElement> navigationIconBuilder = null;
 
             ClassTypeChecker typeChecker = ClassTypeChecker.of(currentClass);
 
-            if (typeChecker.isSourceClass())
-            {
+            if (typeChecker.isSourceClass()) {
                 Optional<PsiClass> testClass = TestFileFinder.forClass(currentClass).findFile();
                 navigationIconBuilder = findIconForSourceClass(currentClass, testClass);
-            }
-            else if (typeChecker.isTestClass())
-            {
+            } else if (typeChecker.isTestClass()) {
                 Optional<PsiClass> sourceClass = SourceFileFinder.forClass(currentClass).findFile();
                 navigationIconBuilder = findIconForTestClass(currentClass, sourceClass);
             }
 
-            if (navigationIconBuilder != null)
-            {
+            if (navigationIconBuilder != null) {
                 result.add(navigationIconBuilder.createLineMarkerInfo(element));
             }
         }
     }
 
-    private NavigationGutterIconBuilder<PsiElement> findIconForSourceClass(PsiClass sourceClass, Optional<PsiClass> testClass)
-    {
+    private NavigationGutterIconBuilder<PsiElement> findIconForSourceClass(PsiClass sourceClass, Optional<PsiClass> testClass) {
+
         NavigationGutterIconBuilder<PsiElement> navigationIconBuilder;
 
-        if (testClass.isPresent())
-        {
-            if (ClassContentChecker.hasTestCases(testClass.get()))
-            {
+        if (testClass.isPresent()) {
+            if (ClassContentChecker.hasTestCases(testClass.get())) {
                 navigationIconBuilder = NavigationIconsBuilder.TEST_CLASS_AVAILABLE.forTarget(testClass.get());
-            }
-            else
-            {
+            } else {
                 navigationIconBuilder = NavigationIconsBuilder.TEST_CLASS_HAS_NO_TESTS.forTarget(testClass.get());
             }
-        }
-        else
-        {
+        } else {
             navigationIconBuilder = NavigationIconsBuilder.TEST_CLASS_NOT_AVAILABLE.forTarget(sourceClass);
         }
 
         return navigationIconBuilder;
     }
 
-    private NavigationGutterIconBuilder<PsiElement> findIconForTestClass(PsiClass testClass, Optional<PsiClass> sourceClass)
-    {
-        NavigationGutterIconBuilder<PsiElement> navigationIconBuilder;
-
-        if (sourceClass.isPresent())
-        {
-            navigationIconBuilder = NavigationIconsBuilder.SOURCE_CLASS_AVAILABLE.forTarget(sourceClass.get());
-        }
-        else
-        {
-            navigationIconBuilder = NavigationIconsBuilder.SOURCE_CLASS_NOT_AVAILABLE.forTarget(testClass);
-        }
-
-        return navigationIconBuilder;
+    private NavigationGutterIconBuilder<PsiElement> findIconForTestClass(PsiClass testClass, Optional<PsiClass> sourceClass) {
+        return sourceClass.map(NavigationIconsBuilder.SOURCE_CLASS_AVAILABLE::forTarget)
+                .orElseGet(() -> NavigationIconsBuilder.SOURCE_CLASS_NOT_AVAILABLE.forTarget(testClass));
     }
 
-    private boolean isSupportedElement(PsiElement element)
-    {
+    private boolean isSupportedElement(PsiElement element) {
+
         boolean isSupportedElement = false;
 
         boolean isPsiClass = element instanceof PsiIdentifier &&
                 element.getParent() instanceof PsiClass;
 
-        if (isPsiClass)
-        {
+        if (isPsiClass) {
             PsiClass psiClass = (PsiClass) element.getParent();
             boolean isJavaClass = PsiClassHelper.isJavaClass(psiClass);
-            boolean isInModule = PsiClassHelper.getClassModule(psiClass) != null;
+            boolean isInModule = PsiClassHelper.getClassModule(psiClass).isPresent();
 
-            if (isJavaClass && isInModule)
-            {
+            if (isJavaClass && isInModule) {
                 isSupportedElement = true;
             }
         }
