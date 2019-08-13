@@ -14,7 +14,7 @@
       Release 1.0: First release.<br>
       Release 1.1: Bug fixing. JUnit 5 tests supported.<br>
       Release 2.0: Test class suffixes became configurable.<br>
-      Release 2.1: Bug fixing.<br>
+      Release 2.1: Bug fixing and meaningful messages.<br>
     ]]>
     </change-notes>
 
