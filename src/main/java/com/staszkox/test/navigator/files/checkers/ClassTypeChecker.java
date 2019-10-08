@@ -3,6 +3,7 @@ package com.staszkox.test.navigator.files.checkers;
 import com.intellij.psi.PsiClass;
 import com.staszkox.test.navigator.configuration.TestNavigatorConfig;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -19,11 +20,20 @@ public class ClassTypeChecker {
     }
 
     public boolean isTestClass() {
-        return psiClass != null && nameEndsWithTestSuffix();
+        return psiClass != null && (nameEndsWithTestSuffix() || hasTestSuperclass());
     }
 
     public boolean isSourceClass() {
-        return psiClass != null && !nameEndsWithTestSuffix();
+        return psiClass != null && !isTestClass();
+    }
+
+    private boolean hasTestSuperclass() {
+
+        PsiClass superClass = psiClass.getSuperClass();
+        boolean hasSuperclass = superClass != null && superClass.getQualifiedName() != null;
+
+        return hasSuperclass && Arrays.stream(TestFileSuperclass.values())
+                .anyMatch(superClassType -> superClassType.getSuperclass().equals(superClass.getQualifiedName()));
     }
 
     private boolean nameEndsWithTestSuffix() {

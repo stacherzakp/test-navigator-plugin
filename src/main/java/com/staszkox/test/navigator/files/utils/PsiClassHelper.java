@@ -11,6 +11,7 @@ import java.util.Optional;
 
 public class PsiClassHelper {
     private static final String JAVA_EXT = "java";
+    private static final String GROOVY_EXT = "groovy";
 
     public static Optional<Module> getClassModule(PsiClass clazz) {
 
@@ -25,8 +26,13 @@ public class PsiClassHelper {
         }
     }
 
-    public static boolean isJavaClass(PsiClass psiClass) {
-        return getVirtualFile(psiClass) != null && Objects.equals(getVirtualFile(psiClass).getExtension(), JAVA_EXT);
+    public static boolean isSupportedClassType(PsiClass psiClass) {
+        VirtualFile virtualFile = getVirtualFile(psiClass);
+        return virtualFile != null && isSupportedExtension(virtualFile);
+    }
+
+    private static boolean isSupportedExtension(VirtualFile virtualFile) {
+        return Objects.equals(virtualFile.getExtension(), JAVA_EXT) || Objects.equals(virtualFile.getExtension(), GROOVY_EXT);
     }
 
     private static VirtualFile getVirtualFile(PsiClass clazz) {

@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public enum TestAnnotations {
+public enum TestMethodAnnotation {
     JUNIT4("org.junit.Test"),
     JUNIT5("org.junit.jupiter.api.Test"),
     JUNIT5_REPEATED_TEST("org.junit.jupiter.api.RepeatedTest"),
@@ -12,12 +12,12 @@ public enum TestAnnotations {
 
     private final String fullTestAnnotationClassName;
 
-    TestAnnotations(String fullTestAnnotationClassName) {
+    TestMethodAnnotation(String fullTestAnnotationClassName) {
         this.fullTestAnnotationClassName = fullTestAnnotationClassName;
     }
 
     public static List<String> getAllAnnotationNames() {
-        return Arrays.stream(TestAnnotations.values())
+        return Arrays.stream(TestMethodAnnotation.values())
                 .map(testAnnotation -> testAnnotation.fullTestAnnotationClassName)
                 .collect(Collectors.toList());
     }

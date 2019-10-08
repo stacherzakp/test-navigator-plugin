@@ -6,6 +6,7 @@ import com.intellij.codeInsight.navigation.NavigationGutterIconBuilder;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiIdentifier;
+import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.staszkox.test.navigator.files.checkers.ClassContentChecker;
 import com.staszkox.test.navigator.files.checkers.ClassTypeChecker;
 import com.staszkox.test.navigator.files.finders.SourceFileFinder;
@@ -67,19 +68,31 @@ public class NavigationIconsMarkerProvider extends RelatedItemLineMarkerProvider
 
         boolean isSupportedElement = false;
 
-        boolean isPsiClass = element instanceof PsiIdentifier &&
-                element.getParent() instanceof PsiClass;
-
-        if (isPsiClass) {
+        if (isPsiClass(element)) {
             PsiClass psiClass = (PsiClass) element.getParent();
-            boolean isJavaClass = PsiClassHelper.isJavaClass(psiClass);
+            boolean isSupportedClassType = PsiClassHelper.isSupportedClassType(psiClass);
             boolean isInModule = PsiClassHelper.getClassModule(psiClass).isPresent();
 
-            if (isJavaClass && isInModule) {
+            if (isSupportedClassType && isInModule) {
                 isSupportedElement = true;
             }
         }
 
         return isSupportedElement;
+    }
+
+    private boolean isPsiClass(PsiElement element) {
+
+        boolean isPsiClass;
+
+        if ("Groovy".equals(element.getLanguage().getID())) {
+            isPsiClass = element instanceof LeafPsiElement && element.getParent() instanceof PsiClass &&
+                    ((LeafPsiElement) element).getElementType().toString().equals("identifier");
+        } else {
+            isPsiClass = element instanceof PsiIdentifier &&
+                    element.getParent() instanceof PsiClass;
+        }
+
+        return isPsiClass;
     }
 }
