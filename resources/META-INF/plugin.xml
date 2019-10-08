@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.staszkox.test.navigator</id>
     <name>Test navigator</name>
-    <version>2.1</version>
+    <version>3.0</version>
     <vendor email="pawel.stacherzak@gmail.com" url="https://github.com/stacherzakp">StaszkoX</vendor>
 
     <description><![CDATA[
