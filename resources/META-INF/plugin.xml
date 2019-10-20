@@ -19,9 +19,10 @@
     ]]>
     </change-notes>
 
-    <idea-version since-build="145.0"/>
+    <idea-version since-build="172"/>
 
     <depends>org.intellij.groovy</depends>
+    <depends>com.intellij.modules.java</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <codeInsight.lineMarkerProvider language="JAVA"
