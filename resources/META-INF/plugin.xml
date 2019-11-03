@@ -18,7 +18,7 @@
       Classes are recognized by:
       <ul>
         <li>name - suffix is configurable via "Settings -> Tools -> Test navigator plugin" panel</li>
-        </li>location - test class has to be located in the same package as source class</li>
+        <li>location - test class has to be located in the same package as source class</li>
       </ul><br><br>
       The plugin supports Java / Groovy based classes.
     ]]></description>
