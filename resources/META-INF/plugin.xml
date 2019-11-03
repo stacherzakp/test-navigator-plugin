@@ -5,9 +5,22 @@
     <vendor email="pawel.stacherzak@gmail.com" url="https://github.com/stacherzakp">StaszkoX</vendor>
 
     <description><![CDATA[
-      Plugin adds a new gutter icon, which marks java class as tested class
-      (if corresponding test class exists) or as class without tests.<br>
-      Moreover it allows to navigate between such joined classes.<br>
+      The plugin simply adds new gutter icons for currently opened class in code editor.
+      They specify the relationship between a source class and its test class.<br><br>
+      Icons:
+      <ul>
+        <li>Green (T) - there is a test class for given source class</li>
+        <li>Red (T) - test class does not exist or it is not recognized</li>
+        <li>Yellow (T) - there is a test class, however it does not have test cases implemented</li>
+        <li>Green (S) - there is a source class for given test class</li>
+        <li>Red (S) - source class does not exist or it is not recognized</li>
+      </ul><br><br>
+      Classes are recognized by:
+      <ul>
+        <li>name - suffix is configurable via "Settings -> Tools -> Test navigator plugin" panel</li>
+        </li>location - test class has to be located in the same package as source class</li>
+      </ul><br><br>
+      The plugin supports Java / Groovy based classes.
     ]]></description>
 
     <change-notes><![CDATA[
