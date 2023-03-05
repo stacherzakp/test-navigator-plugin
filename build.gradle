@@ -1,12 +1,15 @@
 plugins {
-    id "org.jetbrains.intellij" version "0.4.10"
+    id "org.jetbrains.intellij" version "1.13.1"
 }
 
-intellij {
-    version '2019.2'
-    updateSinceUntilBuild = false
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.jetbrains.intellij'
 
-    plugins 'java', 'groovy'
+intellij {
+    version = "2022.3"
+    updateSinceUntilBuild = false
+    plugins = ["java", "org.intellij.groovy"]
 }
 
 sourceSets {
@@ -29,10 +32,6 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
-    testCompile group: 'org.mockito', name: 'mockito-core', version: '2.22.0'
-}
-
-apply plugin: 'java'
-apply plugin: 'idea'
-apply plugin: 'org.jetbrains.intellij'
+//dependencies {
+//    testCompile group: 'org.mockito', name: 'mockito-core', version: '2.22.0'
+//}

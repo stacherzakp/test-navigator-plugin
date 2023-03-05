@@ -19,7 +19,7 @@
     ]]>
     </change-notes>
 
-    <idea-version since-build="172"/>
+    <idea-version since-build="223"/>
 
     <depends>org.intellij.groovy</depends>
     <depends>com.intellij.modules.java</depends>
