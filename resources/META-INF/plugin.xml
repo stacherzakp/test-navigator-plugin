@@ -1,13 +1,13 @@
 <idea-plugin>
     <id>com.staszkox.test.navigator</id>
     <name>Test navigator</name>
-    <version>3.0</version>
+    <version>4.0</version>
     <vendor email="pawel.stacherzak@gmail.com" url="https://github.com/stacherzakp">StaszkoX</vendor>
 
     <description><![CDATA[
-      Plugin adds a new gutter icon, which marks java class as tested class
-      (if corresponding test class exists) or as class without tests.<br>
-      Moreover it allows to navigate between such joined classes.<br>
+      Plugin adds a new gutter icon, which marks java class as a tested class
+      (if corresponding test class exists) or as a class without tests.<br>
+      Moreover, it allows to navigate between such joined classes.<br>
     ]]></description>
 
     <change-notes><![CDATA[
@@ -16,6 +16,7 @@
       Release 2.0: Test class suffixes became configurable.<br>
       Release 2.1: Bug fixing and meaningful messages.<br>
       Release 3.0: Groovy / Spock tests support.<br>
+      Release 4.0: Gradle projects support.<br>
     ]]>
     </change-notes>
 
