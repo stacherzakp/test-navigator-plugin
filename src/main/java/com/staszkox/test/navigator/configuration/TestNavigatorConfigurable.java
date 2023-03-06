@@ -1,20 +1,16 @@
 package com.staszkox.test.navigator.configuration;
 
 import com.intellij.openapi.options.SearchableConfigurable;
-import com.staszkox.test.navigator.files.utils.StringUtils;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import java.util.Arrays;
+import java.util.List;
 
 public class TestNavigatorConfigurable implements SearchableConfigurable {
-    private TestNavigatorConfig config;
     private TestNavigatorConfigPanel configPanel;
-
-    public TestNavigatorConfigurable(TestNavigatorConfig config) {
-        this.config = config;
-    }
 
     @NotNull
     @Override
@@ -25,36 +21,52 @@ public class TestNavigatorConfigurable implements SearchableConfigurable {
     @Nls
     @Override
     public String getDisplayName() {
-        return "Test Navigator plugin";
+        return "Test Navigator";
     }
 
     @Nullable
     @Override
     public JComponent createComponent() {
-        String suffixes = String.join(",", config.getTestClassSuffixes());
+        String suffixes = String.join(", ", getConfig().getTestClassSuffixes());
         configPanel = new TestNavigatorConfigPanel(suffixes);
         return configPanel.getPanel();
     }
 
     @Override
     public boolean isModified() {
-        String alreadyConfigured = StringUtils.listToString(config.getTestClassSuffixes());
-        return !configPanel.getSuffixes().equals(alreadyConfigured);
+        String suffixesText = configPanel.getSuffixes();
+        if (org.apache.commons.lang3.StringUtils.isNotEmpty(suffixesText.trim())) {
+            String currentConfig = String.join(", ", getConfig().getTestClassSuffixes());
+            return !suffixesText.equals(currentConfig);
+        }
+        return false;
     }
 
     @Override
     public void apply() {
-        String suffixes = configPanel.getSuffixes().replaceAll("\\s", "");
-        config.setTestClassSuffixes(StringUtils.stringToList(suffixes, ","));
+        String suffixesText = configPanel.getSuffixes();
+
+        if (org.apache.commons.lang3.StringUtils.isNotEmpty(suffixesText.trim())) {
+            List<String> suffixes = Arrays.stream(suffixesText.split(","))
+                    .map(String::trim)
+                    .filter(suffix -> !suffix.isEmpty())
+                    .toList();
+            getConfig().setTestClassSuffixes(suffixes);
+        }
     }
 
     @Override
     public void reset() {
-        configPanel.setSuffixes(StringUtils.listToString(config.getTestClassSuffixes()));
+        String suffixesText = String.join(", ", getConfig().getTestClassSuffixes());
+        configPanel.setSuffixes(suffixesText);
     }
 
     @Override
     public void disposeUIResources() {
         configPanel = null;
+    }
+
+    private TestNavigatorConfig getConfig() {
+        return TestNavigatorConfig.getInstance();
     }
 }

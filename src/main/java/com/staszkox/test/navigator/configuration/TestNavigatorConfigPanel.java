@@ -35,7 +35,7 @@ class TestNavigatorConfigPanel
         panel.add(suffixesTextField, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_NORTH, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
 
         final JLabel fieldDescription = new JLabel();
-        fieldDescription.setText("Delimit possible test class suffixes with comma (e.g. \"Test,TestLong,IT\").");
+        fieldDescription.setText("Delimit possible test class suffixes with a comma (e.g. \"Test, TestLong, IT\").");
         fieldDescription.setVerticalAlignment(SwingConstants.CENTER);
         panel.add(fieldDescription, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_NORTHWEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
 

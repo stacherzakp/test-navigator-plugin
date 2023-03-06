@@ -32,8 +32,8 @@
                                         implementationClass="com.staszkox.test.navigator.marker.NavigationIconsMarkerProvider"/>
         <applicationConfigurable groupId="tools" id="preference.TestNavigator"
                                  instance="com.staszkox.test.navigator.configuration.TestNavigatorConfigurable"/>
-        <applicationService serviceInterface="com.staszkox.test.navigator.configuration.TestNavigatorConfig"
-                            serviceImplementation="com.staszkox.test.navigator.configuration.TestNavigatorConfig"/>
+        <applicationService
+                serviceImplementation="com.staszkox.test.navigator.configuration.TestNavigatorConfig"/>
     </extensions>
 
 </idea-plugin>

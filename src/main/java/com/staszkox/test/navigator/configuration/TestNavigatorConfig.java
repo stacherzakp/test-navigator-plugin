@@ -1,10 +1,8 @@
 package com.staszkox.test.navigator.configuration;
 
 import com.google.common.collect.Lists;
-import com.intellij.openapi.components.PersistentStateComponent;
-import com.intellij.openapi.components.ServiceManager;
-import com.intellij.openapi.components.State;
-import com.intellij.openapi.components.Storage;
+import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.components.*;
 import com.intellij.util.xmlb.XmlSerializerUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -32,9 +30,8 @@ public class TestNavigatorConfig implements PersistentStateComponent<TestNavigat
         XmlSerializerUtil.copyBean(testNavigatorConfig, this);
     }
 
-    @Nullable
     public static TestNavigatorConfig getInstance() {
-        return ServiceManager.getService(TestNavigatorConfig.class);
+        return ApplicationManager.getApplication().getService(TestNavigatorConfig.class);
     }
 
     public List<String> getTestClassSuffixes() {
