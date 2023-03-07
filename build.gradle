@@ -23,7 +23,7 @@ sourceSets {
     }
     test {
         java {
-            srcDirs = ['src/test']
+            srcDirs = ['src/test/java']
         }
     }
 }

@@ -8,6 +8,8 @@ import org.jetbrains.plugins.groovy.lang.psi.impl.statements.typedef.members.GrM
 import java.util.Arrays;
 import java.util.List;
 
+import static com.intellij.codeInsight.AnnotationUtil.CHECK_TYPE;
+
 public class ClassContentChecker {
 
     private static final List<String> testAnnotationNames = TestMethodAnnotation.getAllAnnotationNames();
@@ -18,6 +20,6 @@ public class ClassContentChecker {
             return Arrays.stream(clazz.getAllMethods()).anyMatch(method -> method instanceof GrMethodImpl);
         }
 
-        return Arrays.stream(clazz.getAllMethods()).anyMatch(method -> AnnotationUtil.isAnnotated(method, testAnnotationNames));
+        return Arrays.stream(clazz.getAllMethods()).anyMatch(method -> AnnotationUtil.isAnnotated(method, testAnnotationNames, CHECK_TYPE));
     }
 }

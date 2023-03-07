@@ -31,11 +31,17 @@ public class SourceFileFinder extends FileFinder {
         if (qualifiedClassName != null) {
 
             fileNamesForSearch = testClassSuffixes.stream()
-                    .map(suffix -> qualifiedClassName.replace(suffix, ""))
+                    .map(suffix -> removeSuffixIfExists(qualifiedClassName, suffix))
                     .filter(fileForSearch -> !qualifiedClassName.equals(fileForSearch))
                     .collect(Collectors.toList());
         }
 
         return fileNamesForSearch;
+    }
+
+    private  String removeSuffixIfExists(String key, String suffix) {
+        return key.endsWith(suffix)
+                ? key.substring(0, key.length() - suffix.length())
+                : key;
     }
 }
