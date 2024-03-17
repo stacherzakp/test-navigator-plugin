@@ -20,6 +20,10 @@ public class ClassContentChecker {
             return Arrays.stream(clazz.getAllMethods()).anyMatch(method -> method instanceof GrMethodImpl);
         }
 
-        return Arrays.stream(clazz.getAllMethods()).anyMatch(method -> AnnotationUtil.isAnnotated(method, testAnnotationNames, CHECK_TYPE));
+        if (Arrays.stream(clazz.getAllMethods()).anyMatch(method -> AnnotationUtil.isAnnotated(method, testAnnotationNames, CHECK_TYPE))) {
+            return true;
+        }
+
+        return Arrays.stream(clazz.getAllInnerClasses()).anyMatch(c -> AnnotationUtil.isAnnotated(c, testAnnotationNames, CHECK_TYPE));
     }
 }

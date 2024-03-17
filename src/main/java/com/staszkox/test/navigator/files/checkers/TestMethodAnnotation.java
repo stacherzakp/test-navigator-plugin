@@ -8,7 +8,8 @@ public enum TestMethodAnnotation {
     JUNIT4("org.junit.Test"),
     JUNIT5("org.junit.jupiter.api.Test"),
     JUNIT5_REPEATED_TEST("org.junit.jupiter.api.RepeatedTest"),
-    JUNIT5_PARAMETRIZED_TEST("org.junit.jupiter.params.ParameterizedTest");
+    JUNIT5_PARAMETRIZED_TEST("org.junit.jupiter.params.ParameterizedTest"),
+    JUNIT5_NESTED("org.junit.jupiter.api.Nested");
 
     private final String fullTestAnnotationClassName;
 
